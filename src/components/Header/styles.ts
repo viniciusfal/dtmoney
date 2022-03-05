@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
     background: var(--blue);
-    height: 21.2rem;
+    height: 16rem;
 `;
 
 export const Content = styled.div`
@@ -10,14 +10,14 @@ export const Content = styled.div`
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    padding: 3.2rem 1.6rem ;
+    padding: 2rem 1rem ;
     
     button {
-        padding: 1.2rem 3.2rem;
+        padding: 1rem 2rem;
         border: none;
         color: var(--white);
         background: var(--blue-light);
-        border-radius: .5rem;
+        border-radius: .25rem;
         transition: 1s;
         
         &:hover{

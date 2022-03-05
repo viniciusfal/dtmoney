@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        font-size: 62.5%;
+        
         
         @media(max-width:1080px){
             font-size: 93.75%;
