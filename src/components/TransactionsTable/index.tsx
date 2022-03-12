@@ -1,11 +1,22 @@
 import {Container} from './styles';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import { api } from '../../services/api';
 
+interface Transactions {
+    id: number
+    title: string
+    amount: number
+    category: string
+    type: string
+    createdAt: string
+}
+
 export function TransactionsTable() {
+    const [transactions, setTransactions] = useState<Transactions[]>([]);
+
     useEffect(()=> {
         api.get('transactions')
-        .then((response) => console.log(response.data)); 
+        .then((response) => setTransactions(response.data.transactions)); 
     }, []);
 
     return (
@@ -14,29 +25,32 @@ export function TransactionsTable() {
                 <thead>
                     <tr>
                     <th>Title</th>
-                    <th>Price</th>
+                    <th>Value</th>
                     <th>Category</th>
                     <th>Date</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                    <td>Site Developer</td>
-                    <td className='in-money'>12.000,00</td>
-                    <td>Sale</td>
-                    <td>05/03/2022</td>
-                    </tr>
+                    {transactions.map(transaction => (
+                        <tr key={transaction.id}>
+                        <td>{transaction.title}</td>
+                        <td className={transaction.type}>{
+                            new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'USD'
+                            }).format(transaction.amount)
+                        }</td>
+                        <td>{transaction.category}</td>
+                        <td>{
+                        new Intl.DateTimeFormat('en-US').
+                        format(new Date(transaction.createdAt))
+                        }</td>
+                        </tr>
+                    ))}
                 </tbody>
             
-                <tbody>
-                    <tr>
-                    <td>Barber</td>
-                    <td className='out-money'>- 100,00</td>
-                    <td>Appearance</td>
-                    <td>04/03/2022</td>
-                    </tr>
-                </tbody>
+                
             </table>
         </Container>
     )
