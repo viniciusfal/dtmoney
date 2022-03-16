@@ -24,6 +24,7 @@ export const Container = styled.div`
             &:first-child{
                 color: var(--title)
             }
+            
 
             &.deposit{
                 color: var(--green);

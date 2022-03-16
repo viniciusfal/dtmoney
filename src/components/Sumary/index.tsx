@@ -7,8 +7,23 @@ import {Container} from './styles';
 
 
 export function Sumary(){
-    const transactions = useContext(TransactionsContext)
+    const {transactions} = useContext(TransactionsContext)
 
+    const sumary = transactions.reduce((acc, transaction) => {
+        if(transaction.type === 'deposit') {
+            acc.deposit += transaction.amount
+            acc.total += transaction.amount
+        } else {
+            acc.withdraw += transaction.amount
+            acc.total -= transaction.amount
+        }
+        return acc;
+
+    },{
+        deposit: 0,
+        withdraw:0,
+        total: 0,
+    })
     console.log(transactions)
     return(
         <Container>
@@ -17,7 +32,14 @@ export function Sumary(){
                     <p>Income</p>
                     <img src={incomeImg} alt="Income Image" />
                 </header>
-                <strong>$ 17.400,00</strong>
+                <strong>
+                    {
+                        new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                             }).format(sumary.deposit)
+                    }
+                </strong>
             </div>
     
             <div>
@@ -25,7 +47,14 @@ export function Sumary(){
                     <p>Outcome</p>
                     <img src={outcomeImg} alt="Income Image" />
                 </header>
-                <strong>$ 1.039,00</strong>
+                <strong>
+                    -{
+                        new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                             }).format(sumary.withdraw)
+                    }
+                </strong>
             </div>
     
             <div className='highlight-background'>
@@ -33,7 +62,14 @@ export function Sumary(){
                     <p>Total</p>
                     <img src={totalImg} alt="Income Image" />
                 </header>
-                <strong>$ 16.361,00</strong>
+                <strong>
+                    {
+                        new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD'
+                             }).format(sumary.total)
+                    }
+                </strong>
             </div>
         </Container>
     )

@@ -4,7 +4,11 @@ import {darken,transparentize} from 'polished';
 export const Container = styled.form`
     color:var(--title);
     font-size: 1.5rem;
+    
     margin-bottom: 2rem;
+    h2{
+        margin-bottom: 1.5rem;
+    }
 
     input{
         width: 100%;
@@ -62,7 +66,7 @@ const colors = {
     green: '#33CC95',
 }
 
-export const RadioBox = styled.button<RadioBoxProps>`
+export const RadioBox = styled.div<RadioBoxProps>`
       height: 4rem;
         border:1px solid #d7d7d7;
         border-radius: 0.25rem;
@@ -78,7 +82,8 @@ export const RadioBox = styled.button<RadioBoxProps>`
         transition: border-color .2s;
 
         &:hover{
-            border-color: ${darken(0.1, '#d7d7d7')}
+            border-color: ${darken(0.1, '#d7d7d7')};
+            cursor: pointer;
         }
 
         img {
