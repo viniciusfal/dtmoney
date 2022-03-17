@@ -24,7 +24,7 @@ export function Sumary(){
         withdraw:0,
         total: 0,
     })
-    console.log(transactions)
+   
     return(
         <Container>
             <div>
