@@ -16,10 +16,16 @@ export const Container = styled.div`
         }
 
         td{
+           
             padding:1rem 2rem;
             background: var(--white);
             color: var(--text);
             border: 0;
+
+            @media(max-width:700px) {
+                padding: 1rem 1.5rem;
+            }
+
 
             &:first-child{
                 color: var(--title)
